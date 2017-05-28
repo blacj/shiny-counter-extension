@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
         }, function(response) {
             // Disable or enable view
-            enableChanged(isEnabled);
+            enableChanged(enabled.checked);
         });
     });
 });

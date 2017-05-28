@@ -7,7 +7,7 @@ window.addEventListener('keydown', function(e) {
         return;
     }
 
-    // Send keypress to background.js
+    // Send keypress event to background.js
     chrome.runtime.sendMessage({ 
         type: "keyPress", 
         args: { 

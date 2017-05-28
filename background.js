@@ -7,7 +7,7 @@ chrome.storage.sync.get({
     count: 0,
     key: 'z',
     increment: 1,
-    enabled: false,
+    enabled: true,
     animate: true,
     sprite: false,
     minus_btn: false,
@@ -54,8 +54,8 @@ var minIcon = 1;
 var maxIcon = 12;
 var curIcon = minIcon;
 function flashIcon(decrement) {
-    // icon/icon-add#.png flashes star white
-    // icon/icon-sub#.png flashes star red
+    // icon/icon-add[1-12].png flashes star white
+    // icon/icon-sub[1-12].png flashes star red
     var suffix = (decrement) ? "sub" : "add";
     if (curIcon <= maxIcon) {
         var path = "icon/icon-" + suffix + (curIcon++) + ".png";
