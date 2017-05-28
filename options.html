@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shiny Counter Settings</title>
+        <script src="options.js"></script>
+        <link href="theme.css" rel="stylesheet" type="text/css">
+        <style>
+            body {  
+                text-align: center;
+                width: 500px;
+                height: 100%;
+                box-shadow: 0px 0px 20px #000;
+                margin: auto;
+            }
+
+            input[type="text"], input[type="number"] {
+                width: 140px;    
+                border: 1px solid #D0D0DD;
+                text-align: center;
+                padding: 5px;
+                font-size: 16px;
+            }
+
+            table {
+                border-spacing: 0px;
+                max-width: 500px; 
+                width: 100%;
+                height: 100%;
+                margin: auto;
+            }
+
+            .slider {
+                background-color: #D0D0DD;
+            }
+
+            input:checked + .slider {
+                background-color: steelblue;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px steelblue;
+            }
+
+            td {
+                min-width: 180px;
+                padding: 10px 0px;
+                background: #f6f6f9;
+            }
+
+            td.label {
+                text-align: right;
+                min-width: 205px;
+                padding: 8px 15px;
+            }
+
+            span#reset.icon {
+                position: absolute;
+                padding: 8px 5px;
+                color: steelblue;
+                cursor: pointer;
+            }
+
+            span.icon {
+                font-family: icomoon; 
+            }
+
+            span#reset.icon:hover {
+                color: #303040;
+            }
+
+            #footer button {
+                margin: 5px;
+                font-size: 16px;
+                background: steelblue;
+                border: none;
+                width: 100px;
+                padding: 7px 15px;
+                border-radius: 15px;
+                color: white;
+                font-weight: bold;
+                font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+            }
+
+            #footer button:hover {
+                background: lightskyblue;
+            }
+
+            #header, #footer{
+                width: 100%;
+                max-width: 500px;
+                padding: 15px 0;
+                margin: auto;
+                background-color: #303040;
+                color: white;
+            }
+
+            #header {
+                font-size: 24px;
+                position: relative;
+            }
+
+            td.label span {
+                font-size: 10px;            
+            }
+
+            .desc {
+                font-size: 12px;
+                padding: 5px 60px;
+                background:  #3870a4;
+                color:white;
+            }
+            
+            .label-desc {
+                border-top: 1px solid #3870a4;
+                padding-top: 4px;
+                margin-top: 4px;
+                font-size: 11px;
+            }
+
+            .desc span{
+                line-height: 25px
+            }
+            
+            #header a{
+                top: 8px;
+                position: absolute;
+                font-family: icomoon;
+                color: white;
+                text-decoration: none;
+                font-size:20px;
+            }
+
+            #header a.github {
+                right: 35px;
+            }
+            #header a.twitter {
+                right: 8px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="header">    
+            Shiny Counter Settings   
+            <a class="twitter" href="https://www.twitter.com/jamfarts">T</a><br>
+            <a class="github" href="https://github.com/blacj/shiny-counter-extension">G</a>       
+        </div>
+        <div class="desc">    
+            Please note that this counter will not run while on chrome:// and chrome-extension:// pages (which includes here!)<br>
+            <span>Enter a new tab or continue browsing to get started. Good luck!<span>
+        </div>
+        <table>
+            <tr>
+                <td class="label">Enable Extension</td>
+                <td>
+                    <label class="switch">
+                        <input id="enabled-input" type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Current Target</td>
+                <td>
+                    <input type="text" id="target">
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Current Count</td>
+                <td>
+                    <input type="number" id="count" min="0">
+                    <span id="reset" class="icon">#</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Increments</td>
+                <td>
+                    <input type="number" id="increment" min="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Keyboard Shortcut
+                    <br>
+                    <div class="label-desc">This will not trigger when typing input into forms and text areas</div>
+                </td>
+                <td>
+                    <input type="text" id="shortcut">
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Decrement Button
+                    <br>
+                    <div class="label-desc">A minus <span class="icon">_</span> button will appear in pop-up next to your count, just in case</div></td>
+                <td>
+                    <label class="switch">
+                        <input id="minus_btn" type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Decrement Shortcut
+                    <br>
+                    <div class="label-desc"><span class="decrement-key"></span>+[your shortcut] will decrement your count. <br>Note: The default action will still take place. As in, <span class="decrement-key"></span>+S will still save.</div></td>
+                <td>
+                    <label class="switch">
+                        <input id="minus_key" type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    Animate Icon
+                    <br>
+                    <div class="label-desc">Extension icon will flash white when incremented and red when decremented</div>
+                </td>
+                <td>
+                    <label class="switch">
+                        <input id="animate-icon" type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Show PC Sprite
+                    <br>
+                    <div class="label-desc">If your target is a recognized Pok&eacute;mon name, a shiny PC sprite will appear in the pop-up</div></td>
+                <td>
+                    <label class="switch">
+                        <input id="show-sprite" type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                </td>
+            </tr>
+        </table>
+
+        <div id="footer">     
+            <div id="status"></div>
+            <button id="cancel">Cancel</button>     
+            <button id="save">Save</button>            
+        </div>
+
+    </body>
+</html>

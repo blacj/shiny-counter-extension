@@ -1,0 +1,161 @@
+@import "icon-font/style.css";
+
+body {
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 100%;
+    width: 220px;
+    height: 80px;
+    margin: 0px;
+}
+
+
+/* The switch - the box around the slider */
+    .switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    display:none;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #606070;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider,
+div#settings-btn:hover {
+    background-color: steelblue;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px steelblue;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+#content.is-disabled {
+    opacity: 0.3;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.no-transition,
+.no-transition:before {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
+div#settings {
+    background: #303040;
+    color: white;
+    padding: 5px;
+    line-height: 30px;
+    display: flex;
+}
+
+div#settings span{
+    padding-right: 6px;
+}
+
+div#settings-btn {
+    font-family: icomoon;   
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    width: 22px;
+    height: 22px;
+    background: #606070;
+    border-radius: 18px;
+    line-height: 22px;
+    padding: 3px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 21px;
+}
+
+#settings-btn span {
+    padding-left: 2px;
+}
+
+td {
+    padding: 4px 8px;
+    background: #ffffff;
+    border-bottom: 2px solid #CCC;
+}
+
+td.label {
+    background: steelblue;
+    color: white;
+    width: 80px;
+    border-bottom: 2px solid #3870a4
+}
+
+table {
+    border-spacing: 0px;
+    width: 100%;
+}
+
+span#minus {
+    content: "_";
+    font-family: icomoon;
+    position: absolute;
+    right: 1px;
+    cursor: pointer; 
+    color: steelblue;
+    font-size: 20px;
+}
+
+img#sprite {
+    margin: 0px 10px;
+    -webkit-filter: drop-shadow(1px 1px 0 white)
+		drop-shadow(-1px 1px 0 white)
+		drop-shadow(1px -1px 0 white)
+      	drop-shadow(-1px -1px 0 white);
+	filter: drop-shadow(1px 1px 0 white) 
+		drop-shadow(-1px 1px 0 white)
+		drop-shadow(1px -1px 0 white)
+       	drop-shadow(-1px -1px 0 white);
+}
+
+.hidden {
+    display:;
+}

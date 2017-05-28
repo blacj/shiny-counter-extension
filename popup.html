@@ -1,0 +1,49 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+    <head>
+        <title>Getting Started Extension's Popup</title>
+        <link href="theme.css" rel="stylesheet" type="text/css">
+        <script src="popup.js"></script>
+    </head>
+
+    <body>
+        <div id="settings">
+            <span>Enabled</span>
+            <label class="switch">
+                <input id="enabled-input" type="checkbox">
+                <div id="enabled-slider" class="slider round"></div>
+            </label>
+            <img id="sprite"></img>
+            <div id="settings-btn"><span>@</span></div>
+        </div>
+
+        <div id="content">
+            <table class="popup">
+                <tr>
+                    <td class="label">Target</td>
+                    <td id="target"></td>
+                </tr>
+                <tr>
+                    <td class="label">Seen</td>
+                    <td>
+                        <span id="count"></span>
+                        <span id="minus" class="hidden">_</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Shortcut</td>
+                    <td id="key"></td>
+                </tr>
+            </table>
+
+            
+        </div>
+
+    </body>
+</html>
+
