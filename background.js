@@ -3,10 +3,14 @@ var is_mac = (navigator.appVersion.indexOf("Mac")!=-1);
 
 // Initialize Storage - Use Defaults
 chrome.storage.sync.get({
-    target: 'Shiny!',
-    count: 0,
-    key: 'z',
-    increment: 1,
+    targets: [
+        {
+            name: 'Shiny!',
+            count: 0,
+            key: 'z',
+            increment: 1,
+        }
+    ],
     enabled: true,
     animate: true,
     sprite: false,

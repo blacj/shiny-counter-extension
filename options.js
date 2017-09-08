@@ -3,10 +3,7 @@ var enabled, target, count, key, increment, animate, sprite, minus_btn, minus_ke
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize fields for getting / setting values
     enabled = document.getElementById('enabled-input');
-    target = document.getElementById('target');
-    count = document.getElementById('count');
-    key = document.getElementById('shortcut');
-    increment = document.getElementById('increment');
+    targets = document.getElementById('targets');
     animate = document.getElementById('animate-icon');
     sprite = document.getElementById('show-sprite');
     minus_btn = document.getElementById('minus_btn');
@@ -16,34 +13,39 @@ document.addEventListener('DOMContentLoaded', function() {
     restore_options();
 
     // Keyboard Shortcut Field: display key value as input only.
-    key.onkeydown = function(e) {
+    /*key.onkeydown = function(e) {
         key.value = e.key;
         return false;
-    };
+    };*/
 
     // Ensure count > 0 && increment > 1
-    var enforceFieldMin = function(e) { 
+    /*var enforceFieldMin = function(e) { 
         e.target.value = Math.max(e.target.value, e.target.min);
     }
     increment.onchange = enforceFieldMin;
-    count.onchange = enforceFieldMin;
+    count.onchange = enforceFieldMin;*/
 
     // Decrement Shortcut blurb: Specify Cmd for Mac OS and Ctrl for other OS
     var decrementKey = (navigator.appVersion.indexOf("Mac")!=-1) ? "Cmd" : "Ctrl";
-    for(var i in document.getElementsByClassName("decrement-key")) { 
+    for (var i in document.getElementsByClassName("decrement-key")) { 
         document.getElementsByClassName('decrement-key')[i].textContent = decrementKey;
     }
 
     // Add listeners for buttons
-    document.getElementById('reset').addEventListener('click', reset_count);
+    /* document.getElementById('reset').addEventListener('click', reset_count); todo rmeove ?*/
     document.getElementById('save').addEventListener('click', save_options);
     document.getElementById('cancel').addEventListener('click', restore_options);
+
+    document.getElementById('add-target-btn').addEventListener('click', add_target);
 });
+
 
 // Save New Settings
 function save_options() { 
     // Settings are modified in background.js only to limit 
     // storage requests and duplicate data in each script
+    var targets = [];
+
     chrome.runtime.sendMessage({ 
         type: "saveSettings", 
         settings: { 
@@ -74,18 +76,87 @@ function restore_options() {
     }, function(response) {
         var items = response.settings;
         enabled.checked = items.enabled;
-        target.value = items.target;
-        count.value = items.count;
-        key.value = items.key;
-        increment.value = items.increment;
         animate.checked = items.animate;
         sprite.checked = items.sprite;
         minus_key.checked = items.minus_key;
         minus_btn.checked = items.minus_btn;
+
+        for (var i in items.targets) {
+            var target = items.targets[i];
+            var row = targets.insertRow();
+            
+            row.insertCell(0).innerHTML = target.name;
+            row.insertCell(1).innerHTML = target.count;
+            row.insertCell(2).innerHTML = target.key;
+            row.insertCell(3).innerHTML = target.increment;
+            row.insertCell(4).innerHTML = 'a'; // edit
+            row.insertCell(5).innerHTML = 'd'; // delete
+        }
     });
 }
 
+// add new row for new counter
+function add_target() {
+    var row = targets.insertRow();
+    row.id = "new-target";
+
+    inputName = document.createElement('input');
+    inputCount = document.createElement('input');
+    inputKey = document.createElement('input');
+    inputIncr = document.createElement('input');
+
+    inputName.type = 'text';
+    inputCount.type = 'number';
+    inputKey.type = 'text';
+    inputKey.className = 'shortcut-key';
+    inputIncr.type = 'number';
+
+    row.insertCell(0).appendChild(inputName);
+    row.insertCell(1).appendChild(inputCount);
+    row.insertCell(2).appendChild(inputKey);
+    row.insertCell(3).appendChild(inputIncr);
+    var confirmTarget = row.insertCell(4);
+    var cancelTarget = row.insertCell(5);
+
+    confirmTarget.innerHTML = 'a'; // confirm
+    cancelTarget.innerHTML = 'd'; // delete
+
+    console.log(confirmTarget)
+
+    confirmTarget.addEventListener("click", confirmNewTarget);
+    cancelTarget.addEventListener("click", deleteNewTarget);
+
+    disableFormButtons();
+}
+
+// accept input fields for new target, add to target table
+function confirmNewTarget() {
+    var row = document.getElementById('new-target');
+    console.log(row)
+    enableFormButtons();
+}
+
+// remove input fields for new target
+function deleteNewTarget() {
+    var row = document.getElementById('new-target');
+    row.parentNode.removeChild(row);
+    enableFormButtons();
+}
+
 // Set Count field to 0
-function reset_count() {
+/*function reset_count() {
     count.value = 0;
+}*/
+
+function disableFormButtons() {
+    document.getElementById('save').disabled = true;
+    document.getElementById('cancel').disabled = true;
+    document.getElementById('add-target-btn').visible = false;
+}
+
+function enableFormButtons() {
+    document.getElementById('save').disabled = false;
+    document.getElementById('cancel').disabled = false;
+    /* todo check if max reached before showing */
+    document.getElementById('add-target-btn').visible = true;
 }

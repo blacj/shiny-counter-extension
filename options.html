@@ -14,11 +14,19 @@
             }
 
             input[type="text"], input[type="number"] {
-                width: 140px;    
+                max-width: 120px;    
                 border: 1px solid #D0D0DD;
                 text-align: center;
                 padding: 5px;
-                font-size: 16px;
+                font-size: 14px;
+            }
+
+            input[type="number"] {
+                max-width: 55px;
+            } 
+            
+            input.shortcut-key {
+                max-width: 70px;
             }
 
             table {
@@ -42,7 +50,7 @@
             }
 
             td {
-                min-width: 180px;
+                /*min-width: 180px;*/
                 padding: 10px 0px;
                 background: #f6f6f9;
             }
@@ -68,7 +76,7 @@
                 color: #303040;
             }
 
-            #footer button {
+            button {
                 margin: 5px;
                 font-size: 16px;
                 background: steelblue;
@@ -141,8 +149,8 @@
 
     <body>
         <div id="header">    
-            Shiny Counter Settings   
-            <a class="twitter" href="https://www.twitter.com/jamfarts">T</a><br>
+            <!--Shiny Counter Settings   -->
+            <a class="twitter" href="https://www.twitter.com/jampharos">T</a><br>
             <a class="github" href="https://github.com/blacj/shiny-counter-extension">G</a>       
         </div>
         <div class="desc">    
@@ -160,7 +168,33 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Current Target</td>
+                <td class="label">Current Targets
+                    <br>
+                    <div class="label-desc">
+                        You may have up to 5 simultaneous counters. 
+                        <br/><br/>
+                        Keyboard shortcuts will not trigger when typing input into forms and text areas.
+                    </div></td>
+                <td>
+                    <table id="targets">
+                        <th>Name</th>
+                        <th>Count</th>
+                        <th>Key</th>
+                        <th>+/-</th>
+                    </table>
+                    <button id="add-target-btn">+ Add</button>   
+                </td>
+            </tr>
+        </table>
+
+        <!-- 
+        Target       Count  Key Incr.   
+
+        
+         -->
+        
+<!--                <tr>
+            <td class="label">Current Target</td>
                 <td>
                     <input type="text" id="target">
                 </td>
@@ -186,7 +220,9 @@
                 <td>
                     <input type="text" id="shortcut">
                 </td>
-            </tr>
+            </tr> -->
+        
+        <table>
             <tr>
                 <td class="label">Decrement Button
                     <br>
